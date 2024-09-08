@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Axis" Id="{f04d6db4-ff92-4d67-b285-2162cf4a04b7}">
+    <Declaration><![CDATA[INTERFACE I_Axis
+]]></Declaration>
+    <Method Name="InPosition" Id="{c6a586ca-1224-4e8d-98b7-7b51ddb11535}">
+      <Declaration><![CDATA[METHOD InPosition : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MoveAbsolute" Id="{f2127f6f-c436-4cf6-ae87-0537fa73bb4e}">
+      <Declaration><![CDATA[METHOD MoveAbsolute : BOOL
+VAR_INPUT
+	target : REAL;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

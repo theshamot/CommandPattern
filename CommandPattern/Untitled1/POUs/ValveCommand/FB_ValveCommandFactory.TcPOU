@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ValveCommandFactory" Id="{acd8081e-3e38-4701-9b8d-5e428312f198}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ValveCommandFactory
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CreateCommand" Id="{f2c53adb-7a58-464d-9c22-7893029afccc}">
+      <Declaration><![CDATA[METHOD CreateCommand : I_Command
+VAR_INPUT
+	valve : I_Valve;
+	target : E_ValvePosition;
+	description : STRING;
+END_VAR
+VAR	
+	point : POINTER TO FB_ValveMoveCommand;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[point := __NEW(FB_ValveMoveCommand(valve := valve, target := target, description := description));
+CreateCommand := point^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

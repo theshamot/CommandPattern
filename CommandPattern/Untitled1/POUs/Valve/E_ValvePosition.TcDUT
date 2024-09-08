@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_ValvePosition" Id="{6e90dc27-71ab-446d-924c-d489c8948e0e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_ValvePosition :
+(
+	Home,
+	Work
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

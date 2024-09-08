@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Valve" Id="{7536f8e8-3738-4ee5-9e85-b5edf435218a}">
+    <Declaration><![CDATA[INTERFACE I_Valve
+]]></Declaration>
+    <Method Name="MoveToHome" Id="{b8f49c62-f4c0-45b2-9631-25c7b153820d}">
+      <Declaration><![CDATA[METHOD MoveToHome : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="MoveToWork" Id="{4421bf81-2d66-4e10-8469-b76405e3ef81}">
+      <Declaration><![CDATA[METHOD MoveToWork : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

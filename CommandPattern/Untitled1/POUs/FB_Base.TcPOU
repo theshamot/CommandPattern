@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Base" Id="{e546182a-9a61-412e-a041-ccf1a64e3676}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK FB_Base
+VAR
+    {attribute 'instance-path'} 
+    {attribute 'noinit'} 
+    _InstanceName : STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="InstanceName" Id="{391361aa-c916-4c61-9edb-2a54eb7a55c7}">
+      <Declaration><![CDATA[PROPERTY InstanceName : STRING]]></Declaration>
+      <Get Name="Get" Id="{5ea0a207-a703-4bfa-bd47-aa2c1b3ca6bb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[InstanceName := _InstanceName;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

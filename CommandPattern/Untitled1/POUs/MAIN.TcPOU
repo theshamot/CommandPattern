@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{f93d2092-19d3-483c-b2c9-992cdf119443}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	valve : FB_Valve;
+	factory : FB_ValveCommandFactory;
+	
+(*	
+	home : FB_ValveMoveCommand(valve, E_ValvePosition.Home);
+	work : FB_ValveMoveCommand(valve, E_ValvePosition.Work);
+*)
+	list : ARRAY[0..4] OF I_Command := [
+		
+	];
+		
+	i : INT;
+	start : BOOL;
+	create : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF create THEN
+	create := FALSE;
+
+	list[0] := factory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move to home');
+	list[1] := factory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move to work');
+	list[2] := factory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move to home');
+END_IF
+
+IF start THEN
+	
+	IF list[i] <> 0 THEN
+		list[i].Execute();
+		i := i + 1;
+	ELSE
+		start := FALSE;
+		i := 0;
+	END_IF
+END_IF]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
