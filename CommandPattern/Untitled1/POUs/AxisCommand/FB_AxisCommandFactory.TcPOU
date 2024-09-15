@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_AxisCommandFactory" Id="{69eaf0b2-57d4-478d-9641-4223368e16e6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AxisCommandFactory
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CreateCommand" Id="{7a29d536-8fc7-4a64-823e-2008ceea2af1}">
+      <Declaration><![CDATA[METHOD CreateCommand : I_Command
+VAR_INPUT
+	axis : I_Axis;
+	target : REAL;
+	description : STRING;
+END_VAR
+VAR	
+	point : POINTER TO FB_AxisMoveCommand;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[point := __NEW(FB_AxisMoveCommand(axis := axis, target := target, description := description));
+CreateCommand := point^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

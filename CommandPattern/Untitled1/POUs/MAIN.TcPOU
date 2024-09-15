@@ -4,17 +4,12 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	valve : FB_Valve;
-	factory : FB_ValveCommandFactory;
+	axis : FB_Axis;
+	valveFactory : FB_ValveCommandFactory;
+	axisFactory : FB_AxisCommandFactory;
 	
-(*	
-	home : FB_ValveMoveCommand(valve, E_ValvePosition.Home);
-	work : FB_ValveMoveCommand(valve, E_ValvePosition.Work);
-*)
-	list : ARRAY[0..4] OF I_Command := [
-		
-	];
-		
-	i : INT;
+	invoker : FB_CommandInvoker<20>;
+	
 	start : BOOL;
 	create : BOOL;
 END_VAR
@@ -23,21 +18,20 @@ END_VAR
       <ST><![CDATA[IF create THEN
 	create := FALSE;
 
-	list[0] := factory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move to home');
-	list[1] := factory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move to work');
-	list[2] := factory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move to home');
+	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
+	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 50, 'move axis to position'));                  
+	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move valve to work'));
+	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 0, 'move axis to away'));                       
+	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
 END_IF
 
 IF start THEN
+	start := FALSE;
 	
-	IF list[i] <> 0 THEN
-		list[i].Execute();
-		i := i + 1;
-	ELSE
-		start := FALSE;
-		i := 0;
-	END_IF
-END_IF]]></ST>
+	invoker.Start();
+END_IF
+
+invoker.Cyclic();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

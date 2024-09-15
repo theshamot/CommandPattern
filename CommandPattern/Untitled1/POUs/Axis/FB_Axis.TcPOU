@@ -28,7 +28,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Tc2_System.ADSLOGSTR(0, CONCAT('axis move to position ', TO_STRING(target)), '');]]></ST>
       </Implementation>
     </Method>
   </POU>

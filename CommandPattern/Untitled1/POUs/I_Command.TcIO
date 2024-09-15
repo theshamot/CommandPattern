@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="I_Command" Id="{6ac1caa1-9aa1-46a4-a975-a161e8b4cef4}">
-    <Declaration><![CDATA[INTERFACE I_Command
+    <Declaration><![CDATA[INTERFACE I_Command EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
     <Property Name="Description" Id="{c5cf10c0-d473-4e4f-a074-c70e9881658d}">
       <Declaration><![CDATA[PROPERTY Description : STRING]]></Declaration>
@@ -10,7 +10,7 @@
       </Get>
     </Property>
     <Method Name="Execute" Id="{a051ecf4-eb8f-4ded-b2a2-38f5d78bc77e}">
-      <Declaration><![CDATA[METHOD Execute : BOOL
+      <Declaration><![CDATA[METHOD Execute : E_Result
 VAR_INPUT
 END_VAR
 ]]></Declaration>

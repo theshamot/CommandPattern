@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_CommandInvoker" Id="{f6ea97c1-b361-4680-9d27-e17b57602f50}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CommandInvoker
+VAR_GENERIC CONSTANT
+	MaxCommandCount : UINT := 20;
+END_VAR
+EXTENDS FB_Base
+VAR
+	_Commands : ARRAY[0..MaxCommandCount - 1] OF I_Command;
+	_CommandCount : UINT;
+	
+	invokeIndex : UINT;
+	
+	_busy : BOOL;
+	_done : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddCommand" Id="{558a4463-945b-4535-b113-75c835b88ed2}">
+      <Declaration><![CDATA[METHOD AddCommand : BOOL
+VAR_INPUT
+	command : I_Command;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (NOT _CommandCount < MaxCommandCount) THEN
+	Tc2_System.ADSLOGSTR(0, 'Can not add any more commands!', '');
+	RETURN;
+END_IF
+
+_Commands[_CommandCount] := command;
+_CommandCount := _CommandCount + 1;
+
+AddCommand := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClearCommands" Id="{9a94bee6-4b43-4ebc-88ec-031ddc3491a8}">
+      <Declaration><![CDATA[METHOD ClearCommands : BOOL
+VAR
+	i : UINT;
+	p : POINTER TO BYTE;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO _CommandCount - 1 DO
+	__QUERYPOINTER(_Commands[i], p);
+	__DELETE(p);
+END_FOR
+
+_CommandCount := 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Cyclic" Id="{3cedf336-2bc5-4fe9-9158-43b939c09fe9}">
+      <Declaration><![CDATA[METHOD Cyclic : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_busy) THEN
+	Invoke();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Invoke" Id="{1fb6d0da-5c0e-4695-bca1-1392766a0f71}">
+      <Declaration><![CDATA[METHOD PRIVATE Invoke : BOOL
+VAR
+	commandCompleted : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (_CommandCount = 0) THEN
+	_busy := FALSE;
+	_done := TRUE;
+	
+	Tc2_System.ADSLOGSTR(0, 'Invoker finished. No commands were executed.', '');	
+END_IF
+
+IF (invokeIndex < _CommandCount) THEN
+	commandCompleted := _Commands[invokeIndex].Execute() = E_Result.Done;
+	IF (commandCompleted) THEN
+		invokeIndex := invokeIndex + 1;
+		
+		IF (invokeIndex = _CommandCount) THEN
+			_busy := FALSE;
+			_done := TRUE;
+			
+			Tc2_System.ADSLOGSTR(0, 'Invoker finished', '');
+		END_IF
+	END_IF
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Start" Id="{07470539-7ede-4172-96a9-a7980587ec0b}">
+      <Declaration><![CDATA[METHOD Start : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (NOT _busy) THEN
+	_busy := TRUE;
+	_done := FALSE;
+	
+	invokeIndex := 0;
+	
+	Tc2_System.ADSLOGSTR(0, 'Invoker started', '');
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

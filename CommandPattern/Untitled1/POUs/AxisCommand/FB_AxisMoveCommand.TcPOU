@@ -1,16 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_AxisMoveCommand" Id="{c26ec26f-d8b8-4f52-ab79-4bfc2dc959d2}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_AxisMoveCommand
-VAR_INPUT
-END_VAR
-VAR_OUTPUT
-END_VAR
+    <Declaration><![CDATA[{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK FB_AxisMoveCommand IMPLEMENTS I_Command
 VAR
+	_Axis : I_Axis;
+	_Target : REAL;
+	_Description : STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="Description" Id="{b08bbaba-3238-4666-b36c-e75291820666}">
+      <Declaration><![CDATA[PROPERTY Description : STRING]]></Declaration>
+      <Get Name="Get" Id="{fb223b92-8a32-46ea-874a-048bbfcf52c8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Description := _Description;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Execute" Id="{3d529086-7b42-47c5-b58f-711b47c0902a}">
+      <Declaration><![CDATA[METHOD Execute : E_Result
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Axis.MoveAbsolute(_target);
+
+Execute := E_Result.Done;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_Init" Id="{34bed5db-91fc-4066-a90b-fc405c0eca89}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
+	
+	axis : I_Axis;
+	target : REAL;
+	description : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Axis := axis;
+_Target := target;
+_Description := description;]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

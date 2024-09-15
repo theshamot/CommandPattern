@@ -24,17 +24,19 @@ END_VAR
       </Get>
     </Property>
     <Method Name="Execute" Id="{4d5ed5e8-4bdd-4c01-8be0-e7a4f0af3875}">
-      <Declaration><![CDATA[METHOD Execute : BOOL
+      <Declaration><![CDATA[METHOD Execute : E_Result
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _Target OF
 	
 	E_ValvePosition.Home:
-		Execute := _Valve.MoveToHome();
+		_Valve.MoveToHome();
 	
 	E_ValvePosition.Work:
-		Execute := _Valve.MoveToWork();
-END_CASE]]></ST>
+		_Valve.MoveToWork();
+END_CASE
+
+Execute := E_Result.Done;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_Init" Id="{77fb1ac3-10bd-4baa-9eec-c07e022e78d0}">
