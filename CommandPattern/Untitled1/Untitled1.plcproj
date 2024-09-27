@@ -21,59 +21,68 @@
     <Compile Include="CommandInvoker\FB_CommandInvoker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\AxisCommand\FB_AxisCommandFactory.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\AxisCommand\FB_AxisMoveCommand.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\E_Progress.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\I_Command.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\ValveCommand\FB_ValveCommandFactory.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\ValveCommand\FB_ValveMoveCommand.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Axis\FB_Axis.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Axis\I_Axis.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Valve\E_ValvePosition.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Valve\FB_Valve.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\Valve\I_Valve.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="General\Datatypes\Integer.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="General\Datatypes\PositiveInteger.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="General\Datatypes\Number.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="General\FB_Base.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\AxisCommand\FB_AxisMoveCommand.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\AxisCommand\FB_AxisCommandFactory.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Axis\FB_Axis.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Axis\I_Axis.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\E_Result.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\FB_Base.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\I_Command.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\ValveCommand\FB_ValveCommandFactory.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\ValveCommand\FB_ValveMoveCommand.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Valve\E_ValvePosition.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Valve\FB_Valve.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\Valve\I_Valve.TcIO">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DUTs" />
-    <Folder Include="GVLs" />
     <Folder Include="CommandInvoker" />
-    <Folder Include="POUs\Axis" />
-    <Folder Include="POUs\AxisCommand" />
-    <Folder Include="POUs\ValveCommand" />
-    <Folder Include="POUs\Valve" />
-    <Folder Include="VISUs" />
-    <Folder Include="POUs" />
+    <Folder Include="Commands\AxisCommand" />
+    <Folder Include="Commands\ValveCommand" />
+    <Folder Include="Components" />
+    <Folder Include="Components\Axis" />
+    <Folder Include="Components\Valve" />
+    <Folder Include="Commands" />
+    <Folder Include="General" />
+    <Folder Include="General\Datatypes" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

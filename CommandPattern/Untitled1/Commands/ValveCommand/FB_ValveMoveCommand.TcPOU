@@ -13,7 +13,8 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Property Name="Description" Id="{cbf14950-4b79-4d96-ab7a-2f398e37eb22}">
-      <Declaration><![CDATA[PROPERTY Description : STRING]]></Declaration>
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Description : STRING]]></Declaration>
       <Get Name="Get" Id="{e59c0537-ef0f-4533-9f3e-d3b6d2ebbafb}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -24,7 +25,7 @@ END_VAR
       </Get>
     </Property>
     <Method Name="Execute" Id="{4d5ed5e8-4bdd-4c01-8be0-e7a4f0af3875}">
-      <Declaration><![CDATA[METHOD Execute : E_Result
+      <Declaration><![CDATA[METHOD Execute : E_Progress
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _Target OF
@@ -36,7 +37,7 @@ END_VAR
 		_Valve.MoveToWork();
 END_CASE
 
-Execute := E_Result.Done;]]></ST>
+Execute := E_Progress.Completed;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_Init" Id="{77fb1ac3-10bd-4baa-9eec-c07e022e78d0}">

@@ -23,6 +23,8 @@ END_VAR
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move valve to work'));
 	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 0, 'move axis to away'));                       
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
+	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move valve to work'));
+	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
 END_IF
 
 IF start THEN

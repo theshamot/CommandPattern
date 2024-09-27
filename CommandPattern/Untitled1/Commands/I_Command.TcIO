@@ -4,13 +4,14 @@
     <Declaration><![CDATA[INTERFACE I_Command EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
     <Property Name="Description" Id="{c5cf10c0-d473-4e4f-a074-c70e9881658d}">
-      <Declaration><![CDATA[PROPERTY Description : STRING]]></Declaration>
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Description : STRING]]></Declaration>
       <Get Name="Get" Id="{ceaab77b-fce3-4f05-8452-3596b29a365b}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
     <Method Name="Execute" Id="{a051ecf4-eb8f-4ded-b2a2-38f5d78bc77e}">
-      <Declaration><![CDATA[METHOD Execute : E_Result
+      <Declaration><![CDATA[METHOD Execute : E_Progress
 VAR_INPUT
 END_VAR
 ]]></Declaration>
