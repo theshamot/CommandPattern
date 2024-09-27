@@ -21,22 +21,22 @@
     <Compile Include="CommandInvoker\FB_CommandInvoker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\AxisCommand\FB_AxisCommandFactory.TcPOU">
+    <Compile Include="Command\AxisCommandExample\FB_AxisCommandFactory.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\AxisCommand\FB_AxisMoveCommand.TcPOU">
+    <Compile Include="Command\AxisCommandExample\FB_AxisMoveCommand.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\E_Progress.TcDUT">
+    <Compile Include="Command\E_Progress.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\I_Command.TcIO">
+    <Compile Include="Command\I_Command.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\ValveCommand\FB_ValveCommandFactory.TcPOU">
+    <Compile Include="Command\ValveCommandExample\FB_ValveCommandFactory.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\ValveCommand\FB_ValveMoveCommand.TcPOU">
+    <Compile Include="Command\ValveCommandExample\FB_ValveMoveCommand.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\Axis\FB_Axis.TcPOU">
@@ -75,12 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CommandInvoker" />
-    <Folder Include="Commands\AxisCommand" />
-    <Folder Include="Commands\ValveCommand" />
+    <Folder Include="Command\AxisCommandExample" />
+    <Folder Include="Command\ValveCommandExample" />
     <Folder Include="Components" />
     <Folder Include="Components\Axis" />
     <Folder Include="Components\Valve" />
-    <Folder Include="Commands" />
+    <Folder Include="Command" />
     <Folder Include="General" />
     <Folder Include="General\Datatypes" />
   </ItemGroup>
@@ -92,6 +92,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

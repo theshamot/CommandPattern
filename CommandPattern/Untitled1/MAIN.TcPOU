@@ -12,6 +12,8 @@ VAR
 	
 	start : BOOL;
 	create : BOOL;
+	
+	pauseIndex : INT := -1;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -33,7 +35,11 @@ IF start THEN
 	invoker.Start();
 END_IF
 
-invoker.Cyclic();]]></ST>
+invoker.Cyclic();
+
+IF (invoker.InvokeIndex = pauseIndex AND invoker.ProgressState <> E_Progress.Paused) THEN
+	invoker.Pause();
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
