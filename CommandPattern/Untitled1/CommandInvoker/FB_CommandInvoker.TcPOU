@@ -27,7 +27,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (NOT _CommandCount < CommandCapacity) THEN
-	Tc2_System.ADSLOGSTR(0, 'Can not add any more commands!', '');
+	F_Log('Can not add any more commands!');
 	RETURN;
 END_IF
 
@@ -114,7 +114,7 @@ END_VAR
         <ST><![CDATA[IF (_CommandCount = 0) THEN
 	_ProgressState := E_Progress.Completed;
 	
-	Tc2_System.ADSLOGSTR(0, 'Invoker finished. No commands were executed.', '');	
+	F_Log('Invoker finished. No commands were executed.');	
 END_IF
 
 IF (_InvokeIndex < _CommandCount) THEN
@@ -130,21 +130,20 @@ IF (_InvokeIndex < _CommandCount) THEN
 		IF (_InvokeIndex = _CommandCount - 1) THEN
 			_ProgressState := E_Progress.Completed;
 			
-			Tc2_System.ADSLOGSTR(0, 'Invoker finished', '');
+			F_Log('Invoker finished');
 		END_IF
 
 		_InvokeIndex := _InvokeIndex + 1;
 		
-		progress := 'Invoker progress  ';
-		progress := CONCAT(progress, TO_STRING(_InvokeIndex));
-		progress := CONCAT(progress, '/');
-		progress := CONCAT(progress, TO_STRING(_CommandCount));
-		progress := CONCAT(progress, '  ');
-		progress := CONCAT(progress, LREAL_TO_FMTSTR(ProgressPercent, 1, TRUE));
-		progress := CONCAT(progress, ' %s');
-		Tc2_System.ADSLOGSTR(0, progress, '%');
-// 		Tc2_System.ADSLOGSTR(0, 'ahoj', '');
-// 		Tc2_System.ADSLOGSTR(0, progress, '');
+		F_Log(
+			F_BuildString('Invoker progress  ')
+				.Append(TO_STRING(_InvokeIndex))
+				.Append('/')
+				.Append(TO_STRING(_CommandCount))
+				.Append('  ')
+				.Append(LREAL_TO_FMTSTR(ProgressPercent, 1, TRUE))
+				.Append(' %s')
+				.GetString());
 	END_IF
 END_IF]]></ST>
       </Implementation>
@@ -244,7 +243,7 @@ END_VAR
 		_ProgressState := E_Progress.Running;
 		_PauseRequest := FALSE;
 
-		Tc2_System.ADSLOGSTR(0, 'Invoker started', '');
+		F_Log('Invoker started');
 END_CASE
 ]]></ST>
       </Implementation>

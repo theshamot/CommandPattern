@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_Log" Id="{3282e1c6-2408-4fe0-a2ef-9039b76e2bfe}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_Log
+VAR_INPUT
+	value : T_MaxString;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Tc2_System.ADSLOGSTR(0, value, '%');]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

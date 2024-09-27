@@ -66,6 +66,15 @@
     <Compile Include="General\FB_Base.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="General\F_Log.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InplaceStringBuilder\FB_StringBuilder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InplaceStringBuilder\F_BuildString.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -83,6 +92,7 @@
     <Folder Include="Command" />
     <Folder Include="General" />
     <Folder Include="General\Datatypes" />
+    <Folder Include="InplaceStringBuilder" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

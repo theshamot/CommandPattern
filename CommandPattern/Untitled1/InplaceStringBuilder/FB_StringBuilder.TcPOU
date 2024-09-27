@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_StringBuilder" Id="{2c840a46-1d54-4419-9eea-7ea5d3d0e2ad}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StringBuilder
+VAR
+	_value : T_MaxString;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Append" Id="{1de5ab37-aec6-4e47-9b43-ebab6d307315}">
+      <Declaration><![CDATA[METHOD Append : REFERENCE TO FB_StringBuilder
+VAR_INPUT
+	value : T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_value := CONCAT(_value, value);
+
+Append REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{5eeb5268-f490-4507-ac56-f7ad9465c6bf}">
+      <Declaration><![CDATA[METHOD Clear : REFERENCE TO FB_StringBuilder
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_value := '';
+
+Clear REF= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetString" Id="{8d3ddc0a-f501-495c-b92b-84688db116ba}">
+      <Declaration><![CDATA[METHOD GetString : T_MaxString
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetString := _value;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
