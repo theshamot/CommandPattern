@@ -219,7 +219,21 @@ END_VAR
         <ST><![CDATA[_InvokeIndex := 0;
 _ProgressState := E_Progress.Idle;
 
-_PauseRequest := FALSE;]]></ST>
+_PauseRequest := FALSE;
+
+ResetCommands();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ResetCommands" Id="{4bf09e81-2b2f-44c7-892b-f6b084ee8f3d}">
+      <Declaration><![CDATA[METHOD ResetCommands : BOOL
+VAR
+	i : UINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 0 TO _CommandCount - 1 DO
+	_Commands[i].Reset();
+END_FOR]]></ST>
       </Implementation>
     </Method>
     <Method Name="Start" Id="{07470539-7ede-4172-96a9-a7980587ec0b}">
@@ -238,6 +252,8 @@ END_VAR
 				OR (_ProgressState = E_Progress.Running AND (_PauseRequest OR _StepMode)))) THEN
 			
 			_InvokeIndex := 0;
+			
+			ResetCommands();
 		END_IF
 		
 		_ProgressState := E_Progress.Running;

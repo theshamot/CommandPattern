@@ -9,13 +9,17 @@
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Untitled1</Name>
-    <ProgramVersion>3.1.4026.10</ProgramVersion>
+    <ProgramVersion>3.1.4026.11</ProgramVersion>
     <Application>{6d07beff-a00c-4d43-8ac0-d3eae895fc76}</Application>
     <TypeSystem>{feb59d3d-1a14-4526-9d7d-4fa22527fa0e}</TypeSystem>
     <Implicit_Task_Info>{3ff8cfa3-37f7-4234-a791-4b12a4c980d6}</Implicit_Task_Info>
     <Implicit_KindOfTask>{aae8a2c0-bcf0-4959-bbc9-4ae65e99d104}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{545fb44e-6875-4a57-bf78-f495170055c7}</Implicit_Jitter_Distribution>
     <LibraryReferences>{c4ce2c96-663f-4ca2-8b42-9c4586459be6}</LibraryReferences>
+    <Released>false</Released>
+    <AllowChecksForLibrary>false</AllowChecksForLibrary>
+    <POUsForPropertyAccessIncluded>false</POUsForPropertyAccessIncluded>
+    <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CommandInvoker\FB_CommandInvoker.TcPOU">
@@ -121,8 +125,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -183,14 +187,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

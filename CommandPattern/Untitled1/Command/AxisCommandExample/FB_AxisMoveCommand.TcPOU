@@ -54,5 +54,14 @@ _Target := target;
 _Description := description;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Reset" Id="{c6a07161-05db-43c7-b55a-9ac0a31f9ead}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// nothing to reset here]]></ST>
+      </Implementation>
+    </Method>
   </POU>
 </TcPlcObject>

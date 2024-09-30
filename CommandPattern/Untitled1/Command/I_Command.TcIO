@@ -16,5 +16,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="Reset" Id="{891c298a-99c0-4c69-85da-bdf7b1f2824a}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>
