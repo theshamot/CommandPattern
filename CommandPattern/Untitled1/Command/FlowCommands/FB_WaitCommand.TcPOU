@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_WaitCommand" Id="{ee48ed06-d6a4-4427-864b-5735a143195c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_WaitCommand IMPLEMENTS I_Command
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="Description" Id="{cf856734-5e67-4fbd-9acd-5eef8430cea2}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Description : STRING]]></Declaration>
+      <Get Name="Get" Id="{9606a3b8-9c11-45da-bee8-7b4b3879e4b2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Description := _Description;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="Execute" Id="{243712fe-f590-4562-ad4c-e6ae33e5faa2}">
+      <Declaration><![CDATA[METHOD Execute : E_Progress
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _Target OF
+	
+	E_ValvePosition.Home:
+		_Valve.MoveToHome();
+	
+	E_ValvePosition.Work:
+		_Valve.MoveToWork();
+END_CASE
+
+Execute := E_Progress.Completed;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_Init" Id="{1d072f35-2629-4a18-ad97-2c5b48ff9410}">
+      <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
+//The return value is not evaluated. For a specific influence, you can also declare the
+//methods explicitly and provide additional code there with the standard initialization
+//code. You can evaluate the return value.
+METHOD FB_Init: BOOL
+VAR_INPUT
+    bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
+    bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
+	
+	minWaitTime : TIME;
+	maxWaitTime : TIME;
+	condition : FB_Condition?;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Valve := valve;
+_Target := target;
+_Description := description;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Reset" Id="{5042e983-7f4a-45b2-b0cd-c26e70af9285}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// nothing to reset here]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

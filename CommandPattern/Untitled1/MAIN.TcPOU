@@ -15,6 +15,9 @@ VAR
 	
 	pauseIndex : INT := -1;
 	
+	test : BOOL;
+	
+	val : I_BoolValue;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -40,6 +43,11 @@ invoker.Cyclic();
 
 IF (invoker.InvokeIndex = pauseIndex AND invoker.ProgressState <> E_Progress.Paused) THEN
 	invoker.Pause();
+END_IF
+
+IF test THEN
+	test := FALSE;
+	val := And2(BoolValues.TrueValue, BoolValues.TrueValue);
 END_IF]]></ST>
     </Implementation>
   </POU>

@@ -22,6 +22,12 @@
     <GlobalVersionStructureIncluded>false</GlobalVersionStructureIncluded>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Binding\FB_BoolBindingReadOnly.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Binding\I_BoolBindable.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CommandInvoker\FB_CommandInvoker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -32,6 +38,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\E_Progress.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Command\FlowCommands\FB_WaitCommand.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\I_Command.TcIO">
@@ -85,10 +94,34 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Values\BooleanExpression\E_BooleanOperator.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Values\BooleanExpression\FB_BooleanExpression.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Values\BooleanExpression\And2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Values\BoolValues.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Values\FB_TrueBoolValue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Values\FB_FalseBoolValue.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Values\I_BoolValue.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Binding" />
     <Folder Include="CommandInvoker" />
     <Folder Include="Command\AxisCommandExample" />
+    <Folder Include="Command\FlowCommands" />
     <Folder Include="Command\ValveCommandExample" />
     <Folder Include="Components" />
     <Folder Include="Components\Axis" />
@@ -97,6 +130,8 @@
     <Folder Include="General" />
     <Folder Include="General\Datatypes" />
     <Folder Include="InplaceStringBuilder" />
+    <Folder Include="Values" />
+    <Folder Include="Values\BooleanExpression" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -125,8 +160,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -187,14 +222,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>
