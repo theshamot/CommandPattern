@@ -28,6 +28,7 @@ END_VAR
       <ST><![CDATA[IF create THEN
 	create := FALSE;
 
+	// This is replacement for a CASE OF state machines
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
 	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 50, 'move axis to position'));
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move valve to work'));

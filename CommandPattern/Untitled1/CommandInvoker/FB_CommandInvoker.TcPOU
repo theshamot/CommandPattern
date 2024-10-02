@@ -122,6 +122,8 @@ IF (_InvokeIndex < _CommandCount) THEN
 	commandProgress := _Commands[_InvokeIndex].Execute();
 	IF (commandProgress = E_Progress.Completed) THEN
 		
+		F_Log(F_BuildString('Command "').Append(_Commands[_InvokeIndex].Description).Append('" has finished!').GetString());
+		
 		IF (_PauseRequest OR _StepMode) THEN
 			_ProgressState := E_Progress.Paused;
 			_PauseRequest := FALSE;
