@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_FlowCommandFactory" Id="{00868410-7edf-475a-b22e-9b46595a14e7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FlowCommandFactory
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="CreateWaitCommand" Id="{95530303-1c50-4581-83d3-f1087474df25}">
+      <Declaration><![CDATA[METHOD CreateWaitCommand : I_Command
+VAR_INPUT
+	waitTime : TIME;
+	description : STRING;
+END_VAR
+VAR	
+	point : POINTER TO FB_WaitCommand;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[point := __NEW(FB_WaitCommand(waitTime := waitTime, description := description));
+CreateWaitCommand := point^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CreateWaitForConditionCommand" Id="{be81aff1-59f2-4e4e-a428-1d52f588ad1d}">
+      <Declaration><![CDATA[METHOD CreateWaitForConditionCommand : I_Command
+VAR_INPUT
+	condition : I_BoolValue;
+	minWaitTime : TIME;
+	maxWaitTime : TIME;
+	description : STRING;
+END_VAR
+VAR	
+	point : POINTER TO FB_WaitForConditionCommand;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[point := __NEW(FB_WaitForConditionCommand(condition := condition, minWaitTime := minWaitTime, maxWaitTime := maxWaitTime, description := description));
+CreateWaitForConditionCommand := point^;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

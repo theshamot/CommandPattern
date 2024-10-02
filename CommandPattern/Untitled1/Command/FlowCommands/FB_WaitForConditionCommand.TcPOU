@@ -1,21 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_WaitCommand" Id="{ee48ed06-d6a4-4427-864b-5735a143195c}" SpecialFunc="None">
+  <POU Name="FB_WaitForConditionCommand" Id="{1a081878-4346-4de3-9264-4856341ae2ac}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK FB_WaitCommand IMPLEMENTS I_Command
+FUNCTION_BLOCK FB_WaitForConditionCommand IMPLEMENTS I_Command
 VAR
-	waitTime : TIME;
-	waiter : TON;
+	condition : I_BoolValue;
+	minWaitTime : TIME;
+	maxWaitTime : TIME;
+	minWaiter : TON;
+	maxWaiter : TON;
 	_Description : STRING;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Property Name="Description" Id="{cf856734-5e67-4fbd-9acd-5eef8430cea2}">
+    <Property Name="Description" Id="{ead1b661-5d60-49be-89d6-b3a5c12d38e2}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
 PROPERTY Description : STRING]]></Declaration>
-      <Get Name="Get" Id="{9606a3b8-9c11-45da-bee8-7b4b3879e4b2}">
+      <Get Name="Get" Id="{096b513b-77e8-44cc-b4e3-427cadc56271}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -24,20 +27,21 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Execute" Id="{243712fe-f590-4562-ad4c-e6ae33e5faa2}">
+    <Method Name="Execute" Id="{e374f8e9-fa4a-47b1-84a5-cd13345a671e}">
       <Declaration><![CDATA[METHOD Execute : E_Progress
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[waiter(IN := TRUE, PT := waitTime);
+        <ST><![CDATA[minWaiter(IN := TRUE, PT := minWaitTime);
+maxWaiter(IN := maxWaitTime > T#0S, PT := maxWaitTime);
 
-IF (waiter.Q) THEN
+IF ((condition.Value AND minWaiter.Q) OR maxWaiter.Q) THEN
 	Execute := E_Progress.Completed;
 ELSE
 	Execute := E_Progress.Running;
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_Init" Id="{1d072f35-2629-4a18-ad97-2c5b48ff9410}">
+    <Method Name="FB_Init" Id="{5442f766-a903-4c70-9f98-111841e7482a}">
       <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
 //The return value is not evaluated. For a specific influence, you can also declare the
 //methods explicitly and provide additional code there with the standard initialization
@@ -47,22 +51,27 @@ VAR_INPUT
     bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
     bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
 	
-	waitTime : TIME;
+	condition : I_BoolValue;
+	minWaitTime : TIME;
+	maxWaitTime : TIME;
 	description : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[THIS^.waitTime := waitTime;
+        <ST><![CDATA[THIS^.condition := condition;
+THIS^.minWaitTime := minWaitTime;
+THIS^.maxWaitTime := maxWaitTime;
 _Description := description;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Reset" Id="{5042e983-7f4a-45b2-b0cd-c26e70af9285}">
+    <Method Name="Reset" Id="{f626ef0a-73ce-4bb4-8759-051c6de8a162}">
       <Declaration><![CDATA[METHOD Reset
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[waiter(IN := FALSE);]]></ST>
+        <ST><![CDATA[minWaiter(IN := FALSE);
+maxWaiter(IN := FALSE);]]></ST>
       </Implementation>
     </Method>
   </POU>

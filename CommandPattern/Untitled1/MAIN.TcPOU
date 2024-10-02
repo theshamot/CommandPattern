@@ -7,6 +7,7 @@ VAR
 	axis : FB_Axis;
 	valveFactory : FB_ValveCommandFactory;
 	axisFactory : FB_AxisCommandFactory;
+	flowFactory : FB_FlowCommandFactory;
 	
 	invoker : FB_CommandInvoker<20>;
 	
@@ -28,11 +29,15 @@ END_VAR
 	create := FALSE;
 
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
-	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 50, 'move axis to position'));                  
+	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 50, 'move axis to position'));
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move valve to work'));
-	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 0, 'move axis to away'));                       
+	invoker.AddCommand(flowFactory.CreateWaitForConditionCommand(And2(Value(test2), Value(test3)), T#0S, T#0S, 'Wait for test2 AND test3'));
+	invoker.AddCommand(axisFactory.CreateCommand(axis := axis, target := 0, 'move axis to away'));
+	invoker.AddCommand(flowFactory.CreateWaitForConditionCommand(NotValue(test2), T#10S, T#0S, 'Wait at least for NOT test2'));
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
+	invoker.AddCommand(flowFactory.CreateWaitForConditionCommand(NotValue(test3), T#0S, T#10S, 'Wait for NOT test3, but maximum 10 seconds'));
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Work, 'move valve to work'));
+	invoker.AddCommand(flowFactory.CreateWaitCommand(T#5S, 'wait some time'));
 	invoker.AddCommand(valveFactory.CreateCommand(valve := valve, target := E_ValvePosition.Home, 'move valve to home'));
 END_IF
 
