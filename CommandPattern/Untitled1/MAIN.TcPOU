@@ -16,6 +16,9 @@ VAR
 	pauseIndex : INT := -1;
 	
 	test : BOOL;
+	test2 : BOOL;
+	test3 : BOOL;
+	test4 : BOOL;
 	
 	val : I_BoolValue;
 END_VAR
@@ -47,7 +50,11 @@ END_IF
 
 IF test THEN
 	test := FALSE;
-	val := And2(BoolValues.TrueValue, BoolValues.TrueValue);
+	val := And2(Value(test4), Or2(Value(test2), NotValue(test3)));
+END_IF
+
+IF (val <> 0) THEN
+	val.Value;
 END_IF]]></ST>
     </Implementation>
   </POU>

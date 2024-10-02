@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="And4" Id="{097e1958-6933-4acc-86cb-af30df9f2525}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION And4 : I_BoolValue
+VAR_INPUT
+	value1 : I_BoolValue;
+	value2 : I_BoolValue;
+	value3 : I_BoolValue;
+	value4 : I_BoolValue;
+END_VAR
+VAR
+	p : POINTER TO FB_BooleanExpression;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[p := __NEW(FB_BooleanExpression);
+
+p^.Op4(
+	operator := E_BooleanOperator.ANDop,
+	value1 := value1,
+	value2 := value2,
+	value3 := value3,
+	value4 := value4
+);
+
+And4 := p^;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
