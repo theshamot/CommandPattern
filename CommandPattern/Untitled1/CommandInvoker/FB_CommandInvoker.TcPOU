@@ -3,15 +3,17 @@
   <POU Name="FB_CommandInvoker" Id="{f6ea97c1-b361-4680-9d27-e17b57602f50}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_CommandInvoker
 VAR_GENERIC CONSTANT
-	CommandCapacity : UINT := 10;
+	CommandCapacity : INT := 10;
 END_VAR
-EXTENDS FB_Base
+EXTENDS FB_Base IMPLEMENTS I_CommandInvoker
 VAR
 	_Commands : ARRAY[0..CommandCapacity - 1] OF I_Command;
-	_CommandCount : UINT;
+	_CommandCount : INT;
 	
-	_InvokeIndex : UINT;
-	_ProgressState : E_Progress;
+	_Progress : FB_Progress;
+	
+	_InvokeIndex : INT;
+	_ProgressState : E_ProgressStatus;
 	
 	_PauseRequest : BOOL;
 	_StepMode : BOOL;
@@ -40,7 +42,7 @@ AddCommand := TRUE;]]></ST>
     <Method Name="ClearCommands" Id="{9a94bee6-4b43-4ebc-88ec-031ddc3491a8}">
       <Declaration><![CDATA[METHOD ClearCommands
 VAR
-	i : UINT;
+	i : INT;
 	p : POINTER TO BYTE;
 END_VAR
 ]]></Declaration>
@@ -55,7 +57,7 @@ _CommandCount := 0;]]></ST>
     </Method>
     <Property Name="CommandCount" Id="{d512b632-5a54-480f-9bce-4617787f69fe}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
-PROPERTY CommandCount : UINT]]></Declaration>
+PROPERTY CommandCount : INT]]></Declaration>
       <Get Name="Get" Id="{284783af-223d-4d79-a2b0-d4621b790078}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -83,7 +85,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF (_ProgressState = E_Progress.Running) THEN
+        <ST><![CDATA[IF (_ProgressState = E_ProgressStatus.Running) THEN
 	Invoke();
 END_IF
 
@@ -105,14 +107,14 @@ END_VAR]]></Declaration>
     <Method Name="Invoke" Id="{1fb6d0da-5c0e-4695-bca1-1392766a0f71}">
       <Declaration><![CDATA[METHOD PRIVATE Invoke
 VAR
-	commandProgress : E_Progress;
+	commandProgress : E_ProgressStatus;
 	progress : T_MaxString;
 	test : STRING := 'test';
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF (_CommandCount = 0) THEN
-	_ProgressState := E_Progress.Completed;
+	_ProgressState := E_ProgressStatus.Completed;
 	
 	F_Log('Invoker finished. No commands were executed.');	
 END_IF
@@ -120,17 +122,17 @@ END_IF
 IF (_InvokeIndex < _CommandCount) THEN
 	
 	commandProgress := _Commands[_InvokeIndex].Execute();
-	IF (commandProgress = E_Progress.Completed) THEN
+	IF (commandProgress = E_ProgressStatus.Completed) THEN
 		
 		F_Log(F_BuildString('Command "').Append(_Commands[_InvokeIndex].Description).Append('" has finished!').GetString());
 		
 		IF (_PauseRequest OR _StepMode) THEN
-			_ProgressState := E_Progress.Paused;
+			_ProgressState := E_ProgressStatus.Paused;
 			_PauseRequest := FALSE;
 		END_IF
 		
 		IF (_InvokeIndex = _CommandCount - 1) THEN
-			_ProgressState := E_Progress.Completed;
+			_ProgressState := E_ProgressStatus.Completed;
 			
 			F_Log('Invoker finished');
 		END_IF
@@ -152,7 +154,7 @@ END_IF]]></ST>
     </Method>
     <Property Name="InvokeIndex" Id="{ed028e02-57f8-4247-bc34-7a9644dd0787}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
-PROPERTY InvokeIndex : UINT]]></Declaration>
+PROPERTY InvokeIndex : INT]]></Declaration>
       <Get Name="Get" Id="{a1d3390e-bce7-44b8-86fd-ea6ad8635a83}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -202,7 +204,7 @@ END_IF]]></ST>
     </Property>
     <Property Name="ProgressState" Id="{9ad5fd53-3f56-4334-a0c6-c35562f308f3}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
-PROPERTY ProgressState : E_Progress]]></Declaration>
+PROPERTY ProgressState : E_ProgressStatus]]></Declaration>
       <Get Name="Get" Id="{40a75a82-8678-4c39-9502-b446977d447b}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -219,7 +221,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_InvokeIndex := 0;
-_ProgressState := E_Progress.Idle;
+_ProgressState := E_ProgressStatus.Idle;
 
 _PauseRequest := FALSE;
 
@@ -229,7 +231,7 @@ ResetCommands();]]></ST>
     <Method Name="ResetCommands" Id="{4bf09e81-2b2f-44c7-892b-f6b084ee8f3d}">
       <Declaration><![CDATA[METHOD ResetCommands : BOOL
 VAR
-	i : UINT;
+	i : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -246,19 +248,19 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE _ProgressState OF
 	
-	E_Progress.Idle,
-	E_Progress.Paused,
-	E_Progress.Completed:
+	E_ProgressStatus.Idle,
+	E_ProgressStatus.Paused,
+	E_ProgressStatus.Completed:
 		
-		IF (NOT(_ProgressState = E_Progress.Paused
-				OR (_ProgressState = E_Progress.Running AND (_PauseRequest OR _StepMode)))) THEN
+		IF (NOT(_ProgressState = E_ProgressStatus.Paused
+				OR (_ProgressState = E_ProgressStatus.Running AND (_PauseRequest OR _StepMode)))) THEN
 			
 			_InvokeIndex := 0;
 			
 			ResetCommands();
 		END_IF
 		
-		_ProgressState := E_Progress.Running;
+		_ProgressState := E_ProgressStatus.Running;
 		_PauseRequest := FALSE;
 
 		F_Log('Invoker started');

@@ -25,13 +25,16 @@
     <Compile Include="CommandInvoker\FB_CommandInvoker.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CommandInvoker\I_CommandInvoker.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Command\AxisCommandExample\FB_AxisCommandFactory.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\AxisCommandExample\FB_AxisMoveCommand.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Command\E_Progress.TcDUT">
+    <Compile Include="Command\FlowCommands\FB_CompositeCommand.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\FlowCommands\FB_FlowCommandFactory.TcPOU">
@@ -70,7 +73,7 @@
     <Compile Include="General\Datatypes\Integer.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="General\Datatypes\PositiveInteger.TcDUT">
+    <Compile Include="General\Datatypes\Positive.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="General\Datatypes\Number.TcDUT">
@@ -92,6 +95,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Progress\E_ProgressStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Progress\FB_Progress.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Values\Binding\Value.TcPOU">
@@ -162,6 +171,7 @@
     <Folder Include="General" />
     <Folder Include="General\Datatypes" />
     <Folder Include="InplaceStringBuilder" />
+    <Folder Include="Progress" />
     <Folder Include="Values" />
     <Folder Include="Values\Binding" />
     <Folder Include="Values\BooleanExpression" />

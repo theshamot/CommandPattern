@@ -8,6 +8,21 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="CreateCompositeCommand" Id="{a9d78103-dba1-460c-bdb1-e39f202e03fa}">
+      <Declaration><![CDATA[METHOD CreateCompositeCommand : I_Command
+VAR_INPUT
+	invoker : I_CommandInvoker;
+	description : STRING;
+END_VAR
+VAR	
+	point : POINTER TO FB_CompositeCommand;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[point := __NEW(FB_CompositeCommand(invoker := invoker, description := description));
+CreateCompositeCommand := point^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="CreateWaitCommand" Id="{95530303-1c50-4581-83d3-f1087474df25}">
       <Declaration><![CDATA[METHOD CreateWaitCommand : I_Command
 VAR_INPUT

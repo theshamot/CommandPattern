@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_AxisMoveCommand" Id="{c26ec26f-d8b8-4f52-ab79-4bfc2dc959d2}" SpecialFunc="None">
+  <POU Name="FB_CompositeCommand" Id="{75a465cc-b612-40c5-93a3-8e74036cc90d}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK FB_AxisMoveCommand IMPLEMENTS I_Command
+FUNCTION_BLOCK FB_CompositeCommand IMPLEMENTS I_Command
 VAR
-	_Axis : I_Axis;
-	_Target : REAL;
+	invoker : I_CommandInvoker;
 	_Description : STRING;
+	
+	started : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Property Name="Description" Id="{b08bbaba-3238-4666-b36c-e75291820666}">
+    <Property Name="Description" Id="{fb4725b7-6b63-41d2-94b7-662c458c8703}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
 PROPERTY Description : STRING]]></Declaration>
-      <Get Name="Get" Id="{fb223b92-8a32-46ea-874a-048bbfcf52c8}">
+      <Get Name="Get" Id="{5d4f5ff9-70e7-47c0-99c7-e4b9a4fd067e}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -24,16 +25,23 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="Execute" Id="{3d529086-7b42-47c5-b58f-711b47c0902a}">
+    <Method Name="Execute" Id="{0243d9c3-512c-45c5-b801-d0dbdb15436d}">
       <Declaration><![CDATA[METHOD Execute : E_ProgressStatus
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Axis.MoveAbsolute(_target);
+        <ST><![CDATA[IF (NOT started) THEN
+	started := TRUE;
+	
+	invoker.Reset();
+	invoker.Start();
+END_IF
 
-Execute := E_ProgressStatus.Completed;]]></ST>
+invoker.Cyclic();
+
+Execute := invoker.ProgressState;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_Init" Id="{34bed5db-91fc-4066-a90b-fc405c0eca89}">
+    <Method Name="FB_Init" Id="{af1294e3-7020-4014-b09a-224e3070ddee}">
       <Declaration><![CDATA[//FB_Init is always available implicitly and it is used primarily for initialization.
 //The return value is not evaluated. For a specific influence, you can also declare the
 //methods explicitly and provide additional code there with the standard initialization
@@ -43,24 +51,23 @@ VAR_INPUT
     bInitRetains: BOOL; // TRUE: the retain variables are initialized (reset warm / reset cold)
     bInCopyCode: BOOL;  // TRUE: the instance will be copied to the copy code afterward (online change)   
 	
-	axis : I_Axis;
-	target : REAL;
+	invoker : I_CommandInvoker;
 	description : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_Axis := axis;
-_Target := target;
+        <ST><![CDATA[THIS^.invoker := invoker;
 _Description := description;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Reset" Id="{c6a07161-05db-43c7-b55a-9ac0a31f9ead}">
+    <Method Name="Reset" Id="{5561878b-f7fa-4f12-9b9c-9cdff62ae017}">
       <Declaration><![CDATA[METHOD Reset
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// nothing to reset here]]></ST>
+        <ST><![CDATA[started := FALSE;
+invoker.Reset();]]></ST>
       </Implementation>
     </Method>
   </POU>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Progress" Id="{8f9b3bc9-2000-42f6-8ce3-976dcb81528a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Progress
+VAR
+	_Count : INT;
+	_CompletedCount : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="CompletedCount" Id="{89f3efd0-201c-43af-9091-f5ef38d020a3}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY CompletedCount : INT]]></Declaration>
+      <Get Name="Get" Id="{8d92b959-b291-49df-becd-3945b9f27051}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[CompletedCount := _CompletedCount;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{72d530dc-81ea-4dcf-a211-3db1fd457394}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_CompletedCount := CompletedCount;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Count" Id="{213a0b8f-9238-4fa0-be05-113313a0a8ef}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Count : INT]]></Declaration>
+      <Get Name="Get" Id="{204ec83b-d82a-408f-85bf-6570fafe25e0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Count := _Count;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{ba2c20e1-575a-4b12-957a-746916525f53}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_Count := Count;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Percent" Id="{49e12512-aa43-4efb-a574-0568cc78340f}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Percent : REAL]]></Declaration>
+      <Get Name="Get" Id="{59a809c2-2983-4f9f-a371-806a18f61d58}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Percent := 100.0 * UnitProgress;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="PercentString" Id="{cf872626-f565-416b-9a20-00a54e611fed}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PercentString : STRING]]></Declaration>
+      <Get Name="Get" Id="{90446c6b-3b03-44b9-a898-311153e71e12}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[PercentString := CONCAT(LREAL_TO_FMTSTR(Percent, 1, TRUE), ' %');]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="UnitProgress" Id="{c2f09a3d-38d5-4e2e-a644-838010155d92}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY UnitProgress : REAL // Progress 0..1]]></Declaration>
+      <Get Name="Get" Id="{c2eeec0e-1568-4b62-8707-86146dadc1a5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF (_Count = 0) THEN
+	UnitProgress := 0;
+	RETURN;
+END_IF
+
+UnitProgress := _CompletedCount / _Count;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

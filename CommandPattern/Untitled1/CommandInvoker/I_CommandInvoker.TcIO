@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_CommandInvoker" Id="{62bdb913-d3d5-4429-b237-906bc92a3d1a}">
+    <Declaration><![CDATA[INTERFACE I_CommandInvoker
+]]></Declaration>
+    <Method Name="AddCommand" Id="{4576e175-6699-40ec-a8e5-7101b21a0dbb}">
+      <Declaration><![CDATA[METHOD AddCommand : BOOL
+VAR_INPUT
+	command : I_Command;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="ClearCommands" Id="{8e1025a7-7d86-40ef-b30a-1925c49a466d}">
+      <Declaration><![CDATA[METHOD ClearCommands
+VAR
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="CommandCount" Id="{d413e3c4-bb04-4a02-960c-b2efea53856a}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY CommandCount : INT]]></Declaration>
+      <Get Name="Get" Id="{ebad118b-533e-42bb-8083-1de973675f3e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Cyclic" Id="{4bb5e0bf-b79e-4bc7-a747-8c119b7c59d7}">
+      <Declaration><![CDATA[METHOD Cyclic
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="InvokeIndex" Id="{68b441e7-0040-4b8d-97fd-a21af503f102}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY InvokeIndex : INT]]></Declaration>
+      <Get Name="Get" Id="{925ec998-5c06-4bf2-9fe4-351a7f37c3d8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Pause" Id="{2dfdd669-7e3d-49a0-87c4-8266e0768e9b}">
+      <Declaration><![CDATA[METHOD Pause
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="PauseRequest" Id="{55e09eec-4a62-4999-b09d-6fe39041b937}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PauseRequest : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d4521198-0932-447c-a678-f81fb42d2f67}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="ProgressPercent" Id="{f391b72c-ae20-4f05-b592-386f3b528b04}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY ProgressPercent : REAL]]></Declaration>
+      <Get Name="Get" Id="{9ce026f4-67e5-428a-ab77-0f6d4fb9bf13}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="ProgressState" Id="{fa036c99-d75c-439b-b0ba-168f39771360}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY ProgressState : E_ProgressStatus]]></Declaration>
+      <Get Name="Get" Id="{8a6f1849-8ccd-457d-84fb-600e183117eb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Reset" Id="{bf068ff3-ea1b-409a-9078-a4f9e109b6f3}">
+      <Declaration><![CDATA[METHOD Reset
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="ResetCommands" Id="{9563e242-e6d5-4a36-98d7-f659adc80769}">
+      <Declaration><![CDATA[METHOD ResetCommands : BOOL
+VAR
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Start" Id="{5249a640-673f-4182-93d1-709b3af9406b}">
+      <Declaration><![CDATA[METHOD Start
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="StepMode" Id="{7a142922-3bcf-422a-8a29-dad8d02d6482}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY StepMode : BOOL]]></Declaration>
+      <Get Name="Get" Id="{10f62daa-c574-4314-b8ef-15645ba2eacd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{189274e2-a52e-41b5-b4c8-76f65f461ace}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

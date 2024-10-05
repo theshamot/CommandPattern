@@ -25,15 +25,15 @@ END_VAR
       </Get>
     </Property>
     <Method Name="Execute" Id="{243712fe-f590-4562-ad4c-e6ae33e5faa2}">
-      <Declaration><![CDATA[METHOD Execute : E_Progress
+      <Declaration><![CDATA[METHOD Execute : E_ProgressStatus
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[waiter(IN := TRUE, PT := waitTime);
 
 IF (waiter.Q) THEN
-	Execute := E_Progress.Completed;
+	Execute := E_ProgressStatus.Completed;
 ELSE
-	Execute := E_Progress.Running;
+	Execute := E_ProgressStatus.Running;
 END_IF]]></ST>
       </Implementation>
     </Method>

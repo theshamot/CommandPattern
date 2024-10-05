@@ -25,7 +25,7 @@ END_VAR
       </Get>
     </Property>
     <Method Name="Execute" Id="{4d5ed5e8-4bdd-4c01-8be0-e7a4f0af3875}">
-      <Declaration><![CDATA[METHOD Execute : E_Progress
+      <Declaration><![CDATA[METHOD Execute : E_ProgressStatus
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE _Target OF
@@ -37,7 +37,7 @@ END_VAR
 		_Valve.MoveToWork();
 END_CASE
 
-Execute := E_Progress.Completed;]]></ST>
+Execute := E_ProgressStatus.Completed;]]></ST>
       </Implementation>
     </Method>
     <Method Name="FB_Init" Id="{77fb1ac3-10bd-4baa-9eec-c07e022e78d0}">
