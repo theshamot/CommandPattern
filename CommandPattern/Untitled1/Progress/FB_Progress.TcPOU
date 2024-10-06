@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_Progress" Id="{8f9b3bc9-2000-42f6-8ce3-976dcb81528a}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_Progress
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Progress IMPLEMENTS I_Progress
 VAR
 	_Count : INT;
 	_CompletedCount : INT;
+	
+	_ParentProgress : I_Progress;
 END_VAR
 ]]></Declaration>
     <Implementation>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Progress" Id="{29326793-7943-4140-bf62-eeda709cdbe3}">
+    <Declaration><![CDATA[INTERFACE I_Progress
+]]></Declaration>
+    <Property Name="CompletedCount" Id="{c829573e-4a7d-4ac7-ad22-56cc36259683}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY CompletedCount : INT]]></Declaration>
+      <Get Name="Get" Id="{ff1bf0e1-59a4-4cb6-a8d3-2a9d1870e9de}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{65ef38cf-396b-4393-8a87-de5e8a7ca26a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="Count" Id="{437737ac-a917-4734-ab56-2d8ff72366f1}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Count : INT]]></Declaration>
+      <Get Name="Get" Id="{e67442c7-5ef0-4984-bd8c-26694dd5e3f1}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{9d46c23b-2216-481a-ba18-e8d9a9a1143e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="Percent" Id="{6abd908f-b19c-4bca-b78c-0f4295affa37}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Percent : REAL]]></Declaration>
+      <Get Name="Get" Id="{c42a6b73-cdb4-45f1-92df-bf3f2f24a59d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="PercentString" Id="{3b33b290-5b5c-44a3-90d4-155452b5e237}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PercentString : STRING]]></Declaration>
+      <Get Name="Get" Id="{d37a9925-b20a-4360-bbf0-6bea4af6a8d9}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="UnitProgress" Id="{15440529-3a88-4b1a-8865-1340b5e56f8d}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY UnitProgress : REAL // Progress 0..1]]></Declaration>
+      <Get Name="Get" Id="{db44be79-e6d0-4f60-af56-2a686d227bf6}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

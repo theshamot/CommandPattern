@@ -10,8 +10,6 @@ VAR
 	_Commands : ARRAY[0..CommandCapacity - 1] OF I_Command;
 	_CommandCount : INT;
 	
-	_Progress : FB_Progress;
-	
 	_InvokeIndex : INT;
 	_ProgressState : E_ProgressStatus;
 	
